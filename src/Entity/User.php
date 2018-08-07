@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,75 +20,81 @@ class User
     private $id;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $firstname;
 
     /**
-     * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255)
      */
-    private $age;
+    private $lastname;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @Assert\Email()
+     * @ORM\Column(type="string", length=255)
      */
-    private $active;
+    private $email;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $createdAt;
+    private $birthday;
+
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getFirstname(): ?string
     {
-        return $this->name;
+        return $this->firstname;
     }
 
-    public function setName(string $name): self
+    public function setFirstname(string $firstname): self
     {
-        $this->name = $name;
+        $this->firstname = $firstname;
 
         return $this;
     }
 
-    public function getAge(): ?int
+    public function getLastname(): ?string
     {
-        return $this->age;
+        return $this->lastname;
     }
 
-    public function setAge(int $age): self
+    public function setLastname(string $lastname): self
     {
-        $this->age = $age;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
-    public function getActive(): ?bool
+    public function getEmail(): ?string
     {
-        return $this->active;
+        return $this->email;
     }
 
-    public function setActive(bool $active): self
+    public function setEmail(string $email): self
     {
-        $this->active = $active;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getBirthday(): ?\DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->birthday;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setBirthday(?\DateTimeInterface $birthday): self
     {
-        $this->createdAt = $createdAt;
+        $this->birthday = $birthday;
 
         return $this;
     }
+    
 }
