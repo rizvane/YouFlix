@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\LoginUserType;
+use App\Form\ProfileUserType;
 use App\Form\RegisterUserType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -38,7 +40,7 @@ class SecurityController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('login');
         }
 
         return $this->render('security/register.html.twig', [
@@ -59,5 +61,23 @@ class SecurityController extends Controller
             'form' => $form->createView()
         ]);
 
+    }
+
+    /**
+     * @Route("/profile", name="profile")
+     */
+    public function profile(Request $request, EntityManagerInterface $entityManager)
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(ProfileUserType:: class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('security/profile.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }
