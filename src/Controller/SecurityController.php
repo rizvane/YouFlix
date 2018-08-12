@@ -51,7 +51,7 @@ class SecurityController extends Controller
 
     /**
      * @Route("/login", name="login")
-     * 
+     *
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
