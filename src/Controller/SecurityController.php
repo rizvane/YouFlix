@@ -27,6 +27,7 @@ class SecurityController extends Controller
 
     /**
      * @Route("/register", name="register")
+     * Cette route renvoie l'utilisateur vers la page d'enregistreement, ensuite elle renvoie vers le login une fois l'enregistrement effectué.
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -50,6 +51,7 @@ class SecurityController extends Controller
 
     /**
      * @Route("/login", name="login")
+     * 
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {

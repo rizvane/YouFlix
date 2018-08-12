@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     /**
      * @Route("/home", name="home")
+     * Cette page était censé être le home sur lequel l'utilisateur anonyme tombe
      */
     public function index(UserRepository $userRepository)
     {
